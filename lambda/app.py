@@ -2,6 +2,7 @@ import urllib2
 import boto3
 import json
 import logging
+import handler
 
 API_BASE = 'https://dashboard.cash4code.net/score'
 API_TOKEN = 'bb311aeada'
