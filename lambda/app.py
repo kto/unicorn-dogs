@@ -36,12 +36,11 @@ def lambda_handler(msg, context):
         url = API_BASE + '/' + msg_id
         print url
         print result
-        print 'Not sending yet'
-        #req = urllib2.Request(url, data=result, headers={'x-gameday-token':ARGS.API_token})
-        #resp = urllib2.urlopen(req)
-        #resp.close()
-        #msg['sent'] = True
-        #print resp
+        req = urllib2.Request(url, data=result, headers={'x-gameday-token':ARGS.API_token})
+        resp = urllib2.urlopen(req)
+        resp.close()
+        msg['sent'] = True
+        print resp
 
     return 'OK'
 
