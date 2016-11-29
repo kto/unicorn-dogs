@@ -1,5 +1,6 @@
 import urllib2
 import boto3
+import json
 
 MESSAGES = {}
 API_BASE = 'https://dashboard.cash4code.net/score'
@@ -13,7 +14,7 @@ def lambda_handler(event, context):
         key = record['s3']['object']['key']
         msg_data = s3_client.get_object(Bucket=bucket, Key=key)
         if 'Body' in msg_data:
-            handle_event(msg_data['Body'].read())
+            handle_event(json.load(msg_data['Body']))
 
 
 def handle_event(msg):
