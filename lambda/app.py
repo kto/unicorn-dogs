@@ -1,10 +1,22 @@
 import urllib2
+import boto3
 
 MESSAGES = {}
 API_BASE = 'https://dashboard.cash4code.net/score'
 API_TOKEN = 'bb311aeada'
 
-def lambda_handler(msg, context):
+s3_client = boto3.client('s3')
+
+def lambda_handler(event, context):
+    for record in event['Records']:
+        bucket = record['s3']['bucket']['name']
+        key = record['s3']['object']['key']
+        msg_data = s3_client.get_object(Bucket=bucket, Key=key)
+        if 'Body' in msg_data:
+            handle_event(msg_data['Body'].read())
+
+
+def handle_event(msg):
     msg_id = msg['Id']  # The unique ID for this message
     part_number = int(msg['PartNumber'])  # Which part of the message it is
     total_parts = int(msg['TotalParts'])  # How many
