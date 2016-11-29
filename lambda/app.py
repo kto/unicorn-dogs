@@ -6,7 +6,7 @@ import handler
 
 API_BASE = 'https://dashboard.cash4code.net/score'
 API_TOKEN = 'bb311aeada'
-handler = Handler(API_TOKEN, API_BASE, logging.getLogger())
+handler = handler.Handler(API_TOKEN, API_BASE, logging.getLogger())
 
 s3_client = boto3.client('s3')
 
