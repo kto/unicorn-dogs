@@ -1,4 +1,3 @@
-import urllib2
 import boto3
 import json
 import logging
